@@ -1,5 +1,7 @@
 ## Subject
 
+-------
+
 Assignment name  : ft_printf
 Expected files   : ft_printf.c
 Allowed functions: malloc, free, write, va_start, va_arg, va_copy, va_end
