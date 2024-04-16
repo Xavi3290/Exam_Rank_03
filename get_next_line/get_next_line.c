@@ -7,18 +7,20 @@
 
 char	*ft_strchr(char *s, int c)
 {
-	while (*s)
+	int i = 0;
+
+	while (s[i])
 	{
-		if (*s == (char)c)
-			return ((char *)s);
-		s++;
+		if (s[i] == (char)c)
+			return ((char *)&s[i]);
+		i++;
 	}
 	return (NULL);
 }
 
-size_t	ft_strlen(const char *s)
+int	ft_strlen(const char *s)
 {
-	size_t	i = 0;
+	int	i = 0;
 	
 	while (s[i])
 		i++;
@@ -39,7 +41,7 @@ void	ft_strcpy(char *dst, const char *src)
 
 char	*ft_strdup(const char *src)
 {
-	size_t	len = ft_strlen(src) + 1;
+	int		len = ft_strlen(src) + 1;
     char	*dst = malloc(len);	
 	
 	if (dst == NULL)
@@ -50,8 +52,8 @@ char	*ft_strdup(const char *src)
 
 char	*ft_strjoin(char *s1, char const *s2)
 {
-	size_t	s1_len = ft_strlen(s1);
-	size_t	s2_len = ft_strlen(s2);
+	int		s1_len = ft_strlen(s1);
+	int		s2_len = ft_strlen(s2);
 	char	*join = malloc((s1_len + s2_len + 1));
 
 	if (!s1 || !s2)
@@ -93,4 +95,21 @@ char	*get_next_line(int fd)
 	}
 	line[to_copy] = '\0';
 	return (line);
+}
+
+#include <fcntl.h>
+#include <stdio.h>
+
+int main(void)
+{
+	int fd = open("test.txt", O_RDONLY);
+	char *line;	
+
+	while ((line = get_next_line(fd)) != NULL)
+	{
+		printf("%s", line);
+		free(line);
+	}
+	close(fd);
+	return (0);
 }
