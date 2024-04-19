@@ -18,7 +18,7 @@ char	*ft_strchr(char *s, int c)
 	return (NULL);
 }
 
-int	ft_strlen(const char *s)
+int	ft_strlen(char *s)
 {
 	int	i = 0;
 	
@@ -27,41 +27,41 @@ int	ft_strlen(const char *s)
 	return (i);
 }
 
-void	ft_strcpy(char *dst, const char *src)
+void	ft_strcpy(char *dst, char *src)
 {
-    int i = 0;
+    	int i = 0;
     
 	while (src[i])	
 	{
-        dst[i] = src[i];
-        i++;
-    }	
+        	dst[i] = src[i];
+        	i++;
+	}	
 	dst[i] = '\0';
 }
 
-char	*ft_strdup(const char *src)
+char	*ft_strdup(char *src)
 {
 	int		len = ft_strlen(src) + 1;
-    char	*dst = malloc(len);	
+	char	*dst = malloc(len);	
 	
-	if (dst == NULL)
+	if (!dst)
 		return (NULL);
 	ft_strcpy(dst, src);
 	return (dst);
 }
 
-char	*ft_strjoin(char *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	int		s1_len = ft_strlen(s1);
 	int		s2_len = ft_strlen(s2);
-	char	*join = malloc((s1_len + s2_len + 1));
+	char	*join = malloc(s1_len + s2_len + 1);
 
 	if (!s1 || !s2)
 		return (NULL);
 	if (!join)
 		return (NULL);
 	ft_strcpy(join, s1);
-	ft_strcpy((join + s1_len), s2);
+	ft_strcpy(join + s1_len, s2);
 	free(s1);
 	return (join);
 }
@@ -80,10 +80,10 @@ char	*get_next_line(int fd)
 		buf[countread] = '\0';
 		line = ft_strjoin(line, buf);
 	}
-	if (ft_strlen(line) == 0)
+	if (!ft_strlen(line))
 		return (free(line), NULL);
 
-	if (newline != NULL)
+	if (newline)
 	{
 		to_copy = newline - line + 1;
 		ft_strcpy(buf, newline + 1);
@@ -96,6 +96,7 @@ char	*get_next_line(int fd)
 	line[to_copy] = '\0';
 	return (line);
 }
+
 
 /*#include <fcntl.h>
 #include <stdio.h>
