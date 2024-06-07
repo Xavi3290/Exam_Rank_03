@@ -8,7 +8,7 @@ Allowed functions: read, free, malloc
 
 Write a function will store, in the parameter "line", a line that has been read from the file descriptor 0.
 
-Your function must be prototyped as follows: int get_next_line(char **line);
+Your function must be prototyped as follows: int get_next_line(int fd);
 
 Your function should be memory leak free.
 
